@@ -1,5 +1,5 @@
 [options]
-addons_path = /odoo/odoo_15/addons,/odoo/odoo_15/odoo,/home/devkinzz/odoo/custom
+addons_path = /odoo/odoo_15/addons,/odoo/odoo_15/odoo,/home/devkinzz/odoo_dev/odoo15/addons/custom
 admin_passwd = admin
 csv_internal_sep = ,
 data_dir = /home/devkinzz/.local/share/Odoo
@@ -18,7 +18,7 @@ from_filter = False
 geoip_database = /usr/share/GeoIP/GeoLite2-City.mmdb
 http_enable = True
 http_interface =
-http_port = 8003
+http_port = 8018
 import_partial =
 limit_memory_hard = 2684354560
 limit_memory_soft = 2147483648
