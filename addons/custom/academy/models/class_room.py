@@ -1,10 +1,11 @@
 from odoo import models, fields
 
+
 class AcademyClass(models.Model):
     _name = 'academy.class'
     _inherit = 'academy.course'
 
-    name = fields.char(string=('name'))
+    name = fields.Char(string=('name'))
 
     def search(self, domain, offset=0, limit=None, order=None, count=False):
         """
@@ -45,8 +46,9 @@ class AcademyClass(models.Model):
 
     def update_student_info(self, new_student_info):
         # students = self.env['x.student'].search([('name', '=', 'Kien')])   #tim kiem student ten kien
-        students = self.env['x.student'].browse([1,2,3])    #tim kiem student co id la 1 2 3
-        students = self.env.ref('academy.student_a')   # tim den nhung external_id nhung id duoc xac dinh san roi trong data.xml
+        students = self.env['x.student'].browse([1, 2, 3])  # tim kiem student co id la 1 2 3
+        students = self.env.ref(
+            'academy.student_a')  # tim den nhung external_id nhung id duoc xac dinh san roi trong data.xml
         students.write(new_student_info)
 
     def name_get(self):
@@ -54,5 +56,3 @@ class AcademyClass(models.Model):
         for category in self:
             res.append((category.id, " / ".join(category.parents_and_self.mapped('name'))))
         return res
-
-
