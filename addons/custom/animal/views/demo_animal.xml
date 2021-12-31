@@ -1,54 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <data>
+        <record id="demo_animal_action_model" model="ir.ui.view">
+            <field name="name">Demo Animal Form</field>
+            <field name="model">demo.animal</field>
+            <field name="arch" type="xml">
+                <form string="animal_form">
+                    <header>
+                        <button name="change_block" type="object" string="Change state" />
+                        <button name="button_update_to_dog" type="object" string="Change Animal Dog" />
+                        <button name="duplicate_animal" type="object" string="Duplicate Harry" />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"  placeholder="Naruto Shippuden" />
+                            </h1>
+                        </div>
 
-
-<!--    <record id="demo_animal_form_view" model="ir.ui.view">-->
-<!--            <field name="name">Demo Animal</field>-->
-<!--            <field name="model">demo.animal</field>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <form>-->
-<!--                    <header>-->
-<!--                        <button name="button_update_to_dog" type="object" string="Update to DB"></button>-->
-<!--                        <group>-->
-<!--                            <group>-->
-<!--                                <field name="name"></field>-->
-<!--                            </group>-->
-<!--                            <group>-->
-<!--                                <field name="description"></field>-->
-<!--                            </group>-->
-<!--                        </group>-->
-<!--                    </header>-->
-<!--                </form>-->
-<!--            </field>-->
-<!--    </record>-->
-
-    <record id="demo_animal_action" model="ir.actions.act_window">
-            <field name="name">Demo Animal</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">demo.animal</field>
-            <field name="view_mode">tree,kanban,form</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    Create a new Demo Animal Odoo 15 TEST !
-                </p>
+                        <group>
+                            <group>
+                                <field name="name"></field>
+                            </group>
+                            <group>
+                                <field name="description"></field>
+                            </group>
+                            <group>
+                                <field name="gender"></field>
+                            </group>
+                            <group>
+                                <field name="age"></field>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
             </field>
-    </record>
-
-    <!-- Top menu item -->
-    <menuitem id="animal_root"
-            name="Animal"
-            sequence="10"/>
-
-    <menuitem id="demo_animal_menu_root"
-              name="Demo Animal Menu"
-              parent="animal_root"
-              sequence="10"/>
-
-    <menuitem id="demo_animal"
-              name="Demo Animals"
-              parent="demo_animal_menu_root"
-              sequence="10"/>
+        </record>
+    </data>
 
 
 
+        <record id="demo_animal_action" model="ir.actions.act_window">
+                <field name="name">Demo Animal</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">demo.animal</field>
+                <field name="view_mode">tree,kanban,form</field>
+                <field name="help" type="html">
+                    <p class="o_view_nocontent_smiling_face">
+                        Create a new Demo Animal Odoo 15 TEST !
+                    </p>
+                </field>
+        </record>
 </odoo>

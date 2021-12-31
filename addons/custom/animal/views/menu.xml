@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Top menu item -->
+    <menuitem id="animal_root"
+            name="Animal"
+            sequence="10"/>
+
+    <menuitem id="demo_animal_menu_root"
+              name="Demo Animal Menu"
+              parent="animal_root"
+              sequence="10"/>
+
+    <menuitem id="demo_animal"
+              name="Demo Animals"
+              parent="demo_animal_menu_root"
+              sequence="10"/>
+
+</odoo>

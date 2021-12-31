@@ -7,7 +7,8 @@
     'sequence': 10,
     'depends': [],
     'data': [
-        'views/demo_animal.xml'
+        'views/demo_animal.xml',
+        'views/menu.xml'
     ],
     'demo': [
     ],

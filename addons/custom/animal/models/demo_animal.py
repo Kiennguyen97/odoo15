@@ -1,7 +1,5 @@
 from odoo import models, fields, api
 
-
-
 class DemoAnimal(models.Model):
     _name = "demo.animal"
 
@@ -13,6 +11,11 @@ class DemoAnimal(models.Model):
         ('other', 'Other')
     ], required=False, default='male')
     age = fields.Integer(string='Age')
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('confirm', 'Confirm'),
+        ('block', 'Block')
+    ],)
 
     @api.model
     def create(self, vals_list):
@@ -25,3 +28,21 @@ class DemoAnimal(models.Model):
 
     def button_update_to_dog(self):
         self.write({'name': 'DOG'})
+
+    def change_block(self):
+        self.state = 'block'
+
+    @api.constrains('name')
+    def change_state(self):
+        self.state = 'confirm'
+
+    def duplicate_animal(self):
+        self.copy({'name': 'HarryPotter'})
+
+    def default_get(self, fields_list):
+        res = super(DemoAnimal, self).default_get(fields_list)
+        res['name'] = 'HarryPotter'
+        return res
+
+
+
