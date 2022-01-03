@@ -13,6 +13,7 @@
     <menuitem id="demo_animal"
               name="Demo Animals"
               parent="demo_animal_menu_root"
+              action="demo_animal_action"
               sequence="10"/>
 
 </odoo>
