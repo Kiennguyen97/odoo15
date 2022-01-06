@@ -16,4 +16,15 @@
               action="demo_animal_action"
               sequence="10"/>
 
+    <menuitem id="animal_sale_menu_root"
+              name="Animal Sale Menu"
+              parent="animal_root"
+              sequence="20"/>
+
+    <menuitem id="animal_sale"
+              name="Animals Sale"
+              parent="animal_sale_menu_root"
+              action="sale.action_orders"
+              sequence="10"/>
+
 </odoo>

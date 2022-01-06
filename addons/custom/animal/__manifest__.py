@@ -5,10 +5,11 @@
     'version': '1.0',
     'summary': 'Demo Animal',
     'sequence': 10,
-    'depends': [],
+    'depends': ['sale'],
     'data': [
         'views/demo_animal.xml',
-        'views/menu.xml'
+        'views/menu.xml',
+        'views/animal_sale.xml'
     ],
     'demo': [
     ],
