@@ -39,8 +39,11 @@
                 <field name="sale_description"></field>
             </field>
 
-            <xpath expr="//field[@name='date_order']" position="attributes">
-                <attribute name="string">Animal Order Date</attribute>
+<!--            <xpath expr="//field[@name='date_order']" position="attributes">-->
+<!--                <attribute name="string">Animal Order Date</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='date_order']" position="replace">-->
+                <field name="date_order"></field>
             </xpath>
 
         </field>
