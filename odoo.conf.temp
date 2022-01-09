@@ -1,5 +1,5 @@
 [options]
-addons_path = /odoo/odoo_15/addons,/odoo/odoo_15/odoo,/home/devkinzz/odoo_dev/odoo15/addons/custom
+addons_path = /odoo/odoo_15/addons,/odoo/odoo_15/odoo,/home/devkinzz/odoo_dev/odoo15/addons/custom,C:\odoo\enterprise
 admin_passwd = admin
 csv_internal_sep = ,
 data_dir = /home/devkinzz/.local/share/Odoo
