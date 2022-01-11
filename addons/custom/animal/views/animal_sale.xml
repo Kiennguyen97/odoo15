@@ -9,14 +9,18 @@
                 <field name="sale_description"></field>
             </field>
 
-            <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="date_order"></field>
-            </xpath>
+<!--             <xpath expr="//field[@name='date_order']" position="attributes">-->
+<!--                <attribute name="string">Animal Order Date</attribute>-->
+<!--            </xpath>-->
+
+            <field name="date_order" position="attributes">
+                <attribute name="string">Animal Order Date</attribute>
+            </field>
         </field>
     </record>
 
-    <record id="animal_sale_order_list_inherited" model="ir.ui.view">
-        <field name="name">sale.order.inherited</field>
+    <record id="animal_sale_quotation_list_inherited" model="ir.ui.view">
+        <field name="name">sale.quotation.inherited</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_quotation_tree" />
         <field name="arch" type="xml">
@@ -24,9 +28,9 @@
                 <field name="sale_description"></field>
             </field>
 
-            <xpath expr="//field[@name='partner_id']" position="after">
-                <field name="date_order"></field>
-            </xpath>
+<!--            <xpath expr="//field[@name='partner_id']" position="after">-->
+<!--                <field name="date_order"></field>-->
+<!--            </xpath>-->
         </field>
     </record>
 
@@ -39,12 +43,12 @@
                 <field name="sale_description"></field>
             </field>
 
-<!--            <xpath expr="//field[@name='date_order']" position="attributes">-->
-<!--                <attribute name="string">Animal Order Date</attribute>-->
-<!--            </xpath>-->
-            <xpath expr="//field[@name='date_order']" position="replace">-->
-                <field name="date_order"></field>
+            <xpath expr="//field[@name='date_order']" position="attributes">
+                <attribute name="string">Animal Order Date</attribute>
             </xpath>
+<!--            <xpath expr="//field[@name='date_order']" position="replace">&ndash;&gt;-->
+<!--                <field name="date_order"></field>-->
+<!--            </xpath>-->
 
         </field>
     </record>
