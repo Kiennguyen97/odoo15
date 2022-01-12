@@ -25,17 +25,21 @@
                                 <field name="name" />
                             </h1>
                         </div>
-                        <group>
-                            <group>
-                                <field name="property_type_id"></field>
-                                <field name="post_code"></field>
-                                <field name="available_from"></field>
+                        <group name="primary_info" string="Detail" >
+                                <group >
+                                    <field name="property_type_id"></field>
+                                    <field name="post_code"></field>
+                                    <field name="available_from"></field>
+                                </group>
+                                <group>
+                                    <field name="expected_price"></field>
+                                    <field name="selling_price"></field>
+                                    <field name="is_good_choice"></field>
+                                </group>
                             </group>
-                            <group>
-                                <field name="expected_price"></field>
-                                <field name="selling_price"></field>
-                                <field name="is_good_choice"></field>
-                            </group>
+                        <group name="sub_info" string="More Detail" >
+                                <field name="create_date"></field>
+                                <field name="write_date"></field>
                         </group>
                         <notebook>
                             <page string="Description" name="description">
@@ -48,6 +52,16 @@
                                     <group name="sales_person" string="Sales">
                                         <field name="sale_man_id" />
                                         <field name="buyer_id" />
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string="Buyer Signature" name="buyer_signature">
+                                <group>
+                                    <group name="signature" string="Buyer Signature">
+                                        <field name="signed_by" />
+                                        <field name="signed_on" />
+                                        <field name="signature" widget="image" />
                                     </group>
                                 </group>
                             </page>
