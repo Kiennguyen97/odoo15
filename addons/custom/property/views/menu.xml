@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Top menu item -->
+    <menuitem id="property_root"
+            name="Property"
+            sequence="11"/>
+
+    <menuitem id="demo_property_menu_root"
+              name="Property Menu"
+              parent="property_root"
+              sequence="10"/>
+
+    <menuitem id="demo_property"
+              name="Property"
+              parent="demo_property_menu_root"
+              action="demo_property_action"
+              sequence="10"/>
+
+    <menuitem id="demo_property_type"
+              name="Property Type"
+              parent="demo_property_menu_root"
+              action="demo_property_type_action"
+              sequence="20"/>
+
+</odoo>
