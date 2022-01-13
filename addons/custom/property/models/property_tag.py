@@ -9,3 +9,8 @@ class PropertyTag(models.Model):
 
     name = fields.Char(string='Name Tag')
     type_tag = fields.Char(string='Type Tag')
+
+    @api.model
+    def create(self, vals_list):
+        res = super(PropertyTag, self).create(vals_list)
+        return res

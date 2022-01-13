@@ -22,4 +22,10 @@
               action="demo_property_type_action"
               sequence="20"/>
 
+    <menuitem id="demo_property_tag"
+              name="Property Tag"
+              parent="demo_property_menu_root"
+              action="demo_property_tag_action"
+              sequence="30"/>
+
 </odoo>

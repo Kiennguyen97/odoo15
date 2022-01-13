@@ -8,9 +8,9 @@ class Property(models.Model):
     _name = "demo.property"
 
     name = fields.Char(name="Name", required=True)
-    sale_man_id = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
-    buyer_id = fields.Many2one('res.partner', string='Buyer')
-    property_type_id = fields.Many2one('demo.property.type', string='Property Type')
+    sale_man_id = fields.Many2one('res.users', string='Salesperson', index=True, required=True, tracking=True, default=lambda self: self.env.user)
+    buyer_id = fields.Many2one('res.partner', string='Buyer' , required=True)
+    property_type_id = fields.Many2one('demo.property.type', string='Property Type', required=True)
 
     post_code = fields.Char(string='Post Code')
     is_good_choice = fields.Boolean(string='Good Choice')
@@ -23,6 +23,9 @@ class Property(models.Model):
                              max_width=1024, max_height=1024)
     signed_by = fields.Char('Signed By', help='Name of the person that signed the SO.', copy=False)
     signed_on = fields.Datetime('Signed On', help='Date of the signature.', copy=False)
+
+    tag_ids = fields.Many2many('demo.property.tag',string='Property Tag')
+
 
 
 
