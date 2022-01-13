@@ -8,7 +8,8 @@
     'depends': [],
     'data': [
         'views/menu.xml',
-        'views/demo_property.xml'
+        'views/demo_property.xml',
+        'security/ir.model.access.csv'
     ],
     'demo': [
     ],

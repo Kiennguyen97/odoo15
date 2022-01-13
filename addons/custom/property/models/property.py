@@ -8,7 +8,7 @@ class Property(models.Model):
     _name = "demo.property"
 
     name = fields.Char(name="Name", required=True)
-    sale_man_id = fields.Many2one('res.partner', string='Saleman')
+    sale_man_id = fields.Many2one('res.users', string='Salesperson', index=True, tracking=True, default=lambda self: self.env.user)
     buyer_id = fields.Many2one('res.partner', string='Buyer')
     property_type_id = fields.Many2one('demo.property.type', string='Property Type')
 

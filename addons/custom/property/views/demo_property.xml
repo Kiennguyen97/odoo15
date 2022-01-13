@@ -4,72 +4,136 @@
         <field name="name">Properties</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">demo.property</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Create a new  Property
+                Create a new Property
             </p>
         </field>
     </record>
 
     <record id="view_property_tree" model="ir.ui.view">
-            <field name="name">demo.property.tree</field>
-            <field name="model">demo.property</field>
-            <field name="arch" type="xml">
-                <form string="property_form">
-                    <header>
-                    </header>
-                    <sheet>
-                        <div class="oe_title">
-                            <h1>
-                                <field name="name" />
-                            </h1>
+        <field name="name">demo.property.tree</field>
+        <field name="model">demo.property</field>
+        <field name="arch" type="xml">
+            <tree string="Properties" create="false">
+                <field name="name"></field>
+                <field name="property_type_id"></field>
+                <field name="post_code"></field>
+                <field name="available_from"></field>
+                <field name="expected_price"></field>
+                <field name="selling_price"></field>
+                <field name="is_good_choice"></field>
+                <field name="sale_man_id"/>
+                <field name="buyer_id"/>
+                <field name="create_date"></field>
+                <field name="write_date"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_property_filter" model="ir.ui.view">
+        <field name="name">demo.property.select</field>
+        <field name="model">demo.property</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search Property">
+                <field name="name"></field>
+                <field name="sale_man_id"/>
+                <field name="selling_price"></field>
+                <field name="buyer_id"/>
+                <separator/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_property_kanban" model="ir.ui.view">
+        <field name="name">demo.property.kanban</field>
+        <field name="model">demo.property</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_content oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-12">
+                                    <field name="name"/>
+                                </div>
+                                <div class="col-12">
+                                    <field name="sale_man_id"/>
+                                </div>
+                                <div class="col-12">
+                                    <field name="selling_price"/>
+                                </div>
+                                <div class="col-12">
+                                    <field name="buyer_id"/>
+                                </div>
+                            </div>
                         </div>
-                        <group name="primary_info" string="Detail" >
-                                <group >
-                                    <field name="property_type_id"></field>
-                                    <field name="post_code"></field>
-                                    <field name="available_from"></field>
-                                </group>
-                                <group>
-                                    <field name="expected_price"></field>
-                                    <field name="selling_price"></field>
-                                    <field name="is_good_choice"></field>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_property_form" model="ir.ui.view">
+        <field name="name">demo.property.form</field>
+        <field name="model">demo.property</field>
+        <field name="arch" type="xml">
+            <form string="property_form">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group name="primary_info" string="Detail">
+                        <group>
+                            <field name="property_type_id"></field>
+                            <field name="post_code"></field>
+                            <field name="available_from"></field>
+                        </group>
+                        <group>
+                            <field name="expected_price"></field>
+                            <field name="selling_price"></field>
+                            <field name="is_good_choice"></field>
+                        </group>
+                    </group>
+                    <group name="sub_info" string="More Detail">
+                        <field name="create_date"></field>
+                        <field name="write_date"></field>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <group name="description_property" string="Description">
+                                <field name="description_property"/>
+                            </group>
+                        </page>
+                        <page string="Other Info" name="other_information">
+                            <group>
+                                <group name="sales_person" string="Sales">
+                                    <field name="sale_man_id"/>
+                                    <field name="buyer_id"/>
                                 </group>
                             </group>
-                        <group name="sub_info" string="More Detail" >
-                                <field name="create_date"></field>
-                                <field name="write_date"></field>
-                        </group>
-                        <notebook>
-                            <page string="Description" name="description">
-                                <group name="description_property" string="Description">
-                                    <field name="description_property" />
-                                </group>
-                            </page>
-                            <page string="Other Info" name="other_information">
-                                <group>
-                                    <group name="sales_person" string="Sales">
-                                        <field name="sale_man_id" />
-                                        <field name="buyer_id" />
-                                    </group>
-                                </group>
-                            </page>
+                        </page>
 
-                            <page string="Buyer Signature" name="buyer_signature">
-                                <group>
-                                    <group name="signature" string="Buyer Signature">
-                                        <field name="signed_by" />
-                                        <field name="signed_on" />
-                                        <field name="signature" widget="image" />
-                                    </group>
+                        <page string="Buyer Signature" name="buyer_signature">
+                            <group>
+                                <group name="signature" string="Buyer Signature">
+                                    <field name="signed_by"/>
+                                    <field name="signed_on"/>
+                                    <field name="signature" widget="image"/>
                                 </group>
-                            </page>
-                        </notebook>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
     <record id="demo_property_type_action" model="ir.actions.act_window">
         <field name="name">Properties Type</field>
@@ -78,7 +142,7 @@
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Create a new  Property Type
+                Create a new Property Type
             </p>
         </field>
     </record>
