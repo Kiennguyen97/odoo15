@@ -11,9 +11,9 @@ class PropertyOffer(models.Model):
     status = fields.Selection([
         ('accepted', 'Accepted'),
         ('confirm', 'Confirm')
-    ],)
-    partner_id = fields.Many2one('res.partner', required=True)
-    property_id = fields.Many2one('demo.property', required=True)
+    ], string='Status')
+    partner_id = fields.Many2one('res.partner', required=True, string='Partner')
+    property_id = fields.Many2one('demo.property', required=True, ondelete='cascade', string='Property')
 
     @api.model
     def create(self, vals_list):

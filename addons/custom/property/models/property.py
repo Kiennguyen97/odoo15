@@ -9,7 +9,7 @@ class Property(models.Model):
 
     name = fields.Char(name="Name", required=True)
     sale_man_id = fields.Many2one('res.users', string='Salesperson', index=True, required=True, tracking=True, default=lambda self: self.env.user)
-    buyer_id = fields.Many2one('res.partner', string='Buyer' , required=True)
+    buyer_id = fields.Many2one('res.partner', string='Buyer', required=True)
     property_type_id = fields.Many2one('demo.property.type', string='Property Type', required=True)
 
     post_code = fields.Char(string='Post Code')
@@ -24,9 +24,8 @@ class Property(models.Model):
     signed_by = fields.Char('Signed By', help='Name of the person that signed the SO.', copy=False)
     signed_on = fields.Datetime('Signed On', help='Date of the signature.', copy=False)
 
-    tag_ids = fields.Many2many('demo.property.tag',string='Property Tag')
-
-
+    tag_ids = fields.Many2many('demo.property.tag', string='Property Tag')
+    offer_ids = fields.One2many('demo.property.offer', 'property_id', 'Offers', required=True)
 
 
     @api.model

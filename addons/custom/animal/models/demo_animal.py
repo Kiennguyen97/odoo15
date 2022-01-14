@@ -2,6 +2,7 @@ from odoo import models, fields, api
 
 class DemoAnimal(models.Model):
     _name = "demo.animal"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(name="Name", required=True)
     description = fields.Text(name="Description", required=False)

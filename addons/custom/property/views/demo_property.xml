@@ -49,6 +49,31 @@
                                 <field name="description_property"/>
                             </group>
                         </page>
+
+                        <page string="Offers" name="offer_list">
+                            <field name="offer_ids" colspan="4" nolabel="1" height="260">
+                                <tree string="Offer lists">
+                                        <field name="price"/>
+                                        <field name="partner_id"/>
+                                        <field name="status"/>
+                                </tree>
+                                <form string="Create Offer" >
+                                    <group name="sub_info" string="More Detail">
+                                        <field name="price"/>
+                                        <field name="partner_id"/>
+                                        <field name="status"/>
+                                    </group>
+                                </form>
+                            </field>
+                            <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                <group colspan="4">
+                                </group>
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                </group>
+                                <div class="oe_clear"/>
+                            </group>
+                        </page>
+
                         <page string="Other Info" name="other_information">
                             <group>
                                 <group name="sales_person" string="Sales">
@@ -87,6 +112,7 @@
                 <field name="is_good_choice"></field>
                 <field name="sale_man_id"/>
                 <field name="buyer_id"/>
+                <field name="tag_ids" widget="many2many_tags"></field>
                 <field name="create_date"></field>
                 <field name="write_date"></field>
             </tree>

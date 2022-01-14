@@ -5,7 +5,9 @@
     'version': '1.0',
     'summary': 'Demo Property',
     'sequence': 10,
-    'depends': [],
+    'depends': [
+        'mail'
+    ],
     'data': [
         'views/menu.xml',
         'views/demo_property.xml',
