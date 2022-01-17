@@ -36,6 +36,7 @@
                         <group>
                             <field name="expected_price"></field>
                             <field name="selling_price"></field>
+                            <field name="best_offer"></field>
                             <field name="is_good_choice"></field>
                         </group>
                     </group>
@@ -47,17 +48,23 @@
                         <page string="Description" name="description">
                             <group name="description_property" string="Description">
                                 <field name="description_property"/>
+                                <field name="bedrooms"/>
+                                <field name="live_area"/>
+                                <field name="facades"/>
+                                <field name="garage"/>
+                                <field name="garden_area"/>
+                                <field name="garden_orientation"/>
                             </group>
                         </page>
 
                         <page string="Offers" name="offer_list">
                             <field name="offer_ids" colspan="4" nolabel="1" height="260">
                                 <tree string="Offer lists">
-                                        <field name="price"/>
-                                        <field name="partner_id"/>
-                                        <field name="status"/>
+                                    <field name="price"/>
+                                    <field name="partner_id"/>
+                                    <field name="status"/>
                                 </tree>
-                                <form string="Create Offer" >
+                                <form string="Create Offer">
                                     <group name="sub_info" string="More Detail">
                                         <field name="price"/>
                                         <field name="partner_id"/>
@@ -97,7 +104,7 @@
             </form>
         </field>
     </record>
-
+<!-- Tree  list view-->
     <record id="view_property_tree" model="ir.ui.view">
         <field name="name">demo.property.tree</field>
         <field name="model">demo.property</field>
@@ -108,6 +115,7 @@
                 <field name="post_code"></field>
                 <field name="available_from"></field>
                 <field name="expected_price"></field>
+                <field name="best_offer"></field>
                 <field name="selling_price"></field>
                 <field name="is_good_choice"></field>
                 <field name="sale_man_id"/>
@@ -118,17 +126,33 @@
             </tree>
         </field>
     </record>
-
+<!-- Seach config   -->
     <record id="view_property_filter" model="ir.ui.view">
         <field name="name">demo.property.select</field>
         <field name="model">demo.property</field>
         <field name="priority" eval="15"/>
         <field name="arch" type="xml">
             <search string="Search Property">
-                <field name="name"></field>
-                <field name="sale_man_id"/>
-                <field name="selling_price"></field>
-                <field name="buyer_id"/>
+                <field name="name"/>
+                <field name="post_code"/>
+                <field name="expected_price"/>
+                <field name="bedrooms"/>
+                <field name="live_area"/>
+                <field name="facades"/>
+                <filter string="Available" date="available_from" default_period="this_week" name="available_filter"/>
+<!--                <field name="campaign_id"/>-->
+<!--                <separator/>-->
+<!--                <filter string="My Quotations" name="my_quotation" domain="[('user_id', '=', uid)]"/>-->
+<!--                <separator/>-->
+<!--                <filter string="Quotations" name="draft" domain="[('state','in',('draft', 'sent'))]"/>-->
+<!--                <filter string="Sales Orders" name="sales" domain="[('state','in',('sale','done'))]"/>-->
+<!--                <separator/>-->
+<!--                <filter string="Create Date" name="filter_create_date" date="create_date"/>-->
+                <group expand="0" string="Group By">
+<!--                    <filter string="Salesperson" name="salesperson" domain="[]" context="{'group_by': 'user_id'}"/>-->
+<!--                    <filter name="customer" string="Customer" domain="[]" context="{'group_by': 'partner_id'}"/>-->
+                    <filter name="postcode_filter" string="Postcode" domain="[]" context="{'group_by': 'post_code'}"/>
+                </group>
             </search>
         </field>
     </record>
