@@ -8,7 +8,15 @@ create property
 class Property(models.Model):
     _name = "demo.property"
 
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
     name = fields.Char(name="Name", required=True)
+    status = fields.Selection([
+        ('new', 'New'),
+        ('canceled', 'Canceled'),
+        ('processing', 'Processing'),
+        ('sold', 'Sold')
+    ], readonly=True, string='Status', default='new')
     sale_man_id = fields.Many2one('res.users', string='Salesperson', index=True, required=True, tracking=True,
                                   default=lambda self: self.env.user)
     buyer_id = fields.Many2one('res.partner', string='Buyer', required=True)
@@ -16,7 +24,7 @@ class Property(models.Model):
     tag_ids = fields.Many2many('demo.property.tag', string='Property Tag')
     offer_ids = fields.One2many('demo.property.offer', 'property_id', 'Offers', required=True)
 
-    post_code = fields.Float(string='Post Code')
+    post_code = fields.Char(string='Post Code')
     is_good_choice = fields.Boolean(string='Good Choice')
     available_from = fields.Date(string='Available Form')
     expected_price = fields.Float(string='Expected Price')
@@ -28,6 +36,7 @@ class Property(models.Model):
     live_area = fields.Integer(string='Live Area (sqm)')
     facades = fields.Integer(string='Facades')
     garage = fields.Boolean(string='Garage')
+    garden = fields.Boolean(string='Garden')
     garden_area = fields.Integer(string='Garden Area (sqm)')
     garden_orientation = fields.Selection([
         ('east', 'East'),
@@ -35,6 +44,7 @@ class Property(models.Model):
         ('south', 'South'),
         ('north', 'North')
     ], string='Garden Orientation')
+    total_area = fields.Integer(string='Total Area (sqm)', compute='_compute_total_area')
 
     signature = fields.Image('Signature', help='Signature received through the portal.', copy=False, attachment=True,
                              max_width=1024, max_height=1024)
@@ -58,3 +68,32 @@ class Property(models.Model):
                 if best_offer < price:
                     best_offer = price
             record.best_offer = best_offer
+
+    @api.depends('garden_area', 'live_area')
+    def _compute_total_area(self):
+        for record in self:
+            record.total_area = record.live_area + record.garden_area
+
+    @api.onchange('garden')
+    def have_garden(self):
+        for record in self:
+            if record.garden:
+                record.garden_orientation = 'north'
+                record.garden_area = 10
+            else:
+                record.garden_orientation = False
+                record.garden_area = 0
+
+    def sold_property(self):
+        self.status = 'sold'
+
+    def cancel_property(self):
+        self.status = 'canceled'
+
+    def un_cancel_property(self):
+        self.status = 'processing'
+
+    def un_sold(self):
+        self.status = 'processing'
+
+
