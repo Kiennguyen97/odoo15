@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 import datetime
 
 """
@@ -12,8 +12,9 @@ class PropertyOffer(models.Model):
     price = fields.Float(string='Price', required=True)
     status = fields.Selection([
         ('accepted', 'Accepted'),
-        ('confirm', 'Confirm')
-    ], string='Status', default='accepted')
+        ('confirm', 'Confirm'),
+        ('refuse', 'Refuse')
+    ], string='Status', readonly=True)
     partner_id = fields.Many2one('res.partner', required=True, string='Partner')
     property_id = fields.Many2one('demo.property', required=True, ondelete='cascade', string='Property')
 
@@ -56,4 +57,31 @@ class PropertyOffer(models.Model):
             else:
                 validity = deadline - create_date
                 record.validity = validity.days
+
+    def refuse_offer(self):
+        if self.status == 'refuse':
+            return True
+        if self.status == 'accepted':
+            self.property_id.selling_price = 0
+            self.property_id.buyer_id = False
+        self.status = 'refuse'
+
+    def accepted_offer(self):
+        # offers = self.property_id.mapped('offer_ids')
+        if self.status == 'accepted':
+            return True
+        offers = self.property_id.offer_ids
+        for offer in offers:
+            offer.status = 'refuse'
+        self.status = 'accepted'
+        self.property_id.selling_price = self.price
+        self.property_id.buyer_id = self.partner_id
+
+    @api.constrains('status')
+    def check_price_expected(self):
+        for record in self:
+            if self.status == 'refuse':
+                return True
+            if record.price < record.property_id.expected_price * 90 / 100:
+                raise exceptions.ValidationError("It will not possible to accept an offer lower than 90% of the expected price.")
 

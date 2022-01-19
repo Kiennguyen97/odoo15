@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 
 """
 create property 
@@ -11,7 +11,7 @@ class Property(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(name="Name", required=True)
-    status = fields.Selection([
+    state = fields.Selection([
         ('new', 'New'),
         ('canceled', 'Canceled'),
         ('processing', 'Processing'),
@@ -19,7 +19,7 @@ class Property(models.Model):
     ], readonly=True, string='Status', default='new')
     sale_man_id = fields.Many2one('res.users', string='Salesperson', index=True, required=True, tracking=True,
                                   default=lambda self: self.env.user)
-    buyer_id = fields.Many2one('res.partner', string='Buyer', required=True)
+    buyer_id = fields.Many2one('res.partner', string='Buyer')
     property_type_id = fields.Many2one('demo.property.type', string='Property Type', required=True)
     tag_ids = fields.Many2many('demo.property.tag', string='Property Tag')
     offer_ids = fields.One2many('demo.property.offer', 'property_id', 'Offers', required=True)
@@ -29,7 +29,7 @@ class Property(models.Model):
     available_from = fields.Date(string='Available Form')
     expected_price = fields.Float(string='Expected Price')
     best_offer = fields.Float(compute='_compute_best_offer', string='Best Offer')
-    selling_price = fields.Float(string='Selling Price')
+    selling_price = fields.Float(string='Selling Price', readonly=True, default=0)
 
     description_property = fields.Text(string='Description')
     bedrooms = fields.Integer(string='Bedrooms')
@@ -85,15 +85,18 @@ class Property(models.Model):
                 record.garden_area = 0
 
     def sold_property(self):
-        self.status = 'sold'
+        if self.state == 'canceled':
+            raise exceptions.ValidationError("Canceled property can't sold !!!")
+            return true
+        self.state = 'sold'
 
     def cancel_property(self):
-        self.status = 'canceled'
+        self.state = 'canceled'
 
     def un_cancel_property(self):
-        self.status = 'processing'
+        self.state = 'processing'
 
     def un_sold(self):
-        self.status = 'processing'
+        self.state = 'processing'
 
 
