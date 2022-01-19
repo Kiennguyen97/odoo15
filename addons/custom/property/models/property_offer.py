@@ -9,8 +9,10 @@ create property offer
 
 class PropertyOffer(models.Model):
     _name = 'demo.property.offer'
+    _order = 'price desc, sequence'
 
     price = fields.Float(string='Price', required=True)
+    sequence = fields.Integer('Sequence', default=1, help="Used to order stages. Lower is better.")
     status = fields.Selection([
         ('accepted', 'Accepted'),
         ('confirm', 'Confirm'),

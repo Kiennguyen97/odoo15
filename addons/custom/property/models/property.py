@@ -7,10 +7,11 @@ create property
 
 class Property(models.Model):
     _name = "demo.property"
-
+    _order = 'sequence'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(name="Name", required=True)
+    sequence = fields.Integer('Sequence', default=1, help="Used to order stages. Lower is better.")
     state = fields.Selection([
         ('new', 'New'),
         ('canceled', 'Canceled'),

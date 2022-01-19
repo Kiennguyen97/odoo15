@@ -7,9 +7,10 @@ create property tag
 
 class PropertyTag(models.Model):
     _name = 'demo.property.tag'
+    _order = 'name desc'
 
     name = fields.Char(string='Name Tag')
-    type_tag = fields.Char(string='Type Tag')
+    color = fields.Integer(string='Color')
 
     _sql_constraints = [
         ('property_tag_unique', 'Unique(name)',

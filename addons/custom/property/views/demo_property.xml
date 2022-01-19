@@ -12,7 +12,7 @@
             </p>
         </field>
     </record>
-<!-- Form update-->
+<!-- Form property-->
     <record id="view_property_form" model="ir.ui.view">
         <field name="name">demo.property.form</field>
         <field name="model">demo.property</field>
@@ -31,13 +31,13 @@
                             <field name="name"/>
                         </h1>
 
-                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_edit_color': False}"/>
                     </div>
                     <group name="primary_info" string="Detail">
                         <group>
                             <field name="property_type_id"></field>
                             <field name="post_code"></field>
-                            <field name="available_from"></field>
+                            <field name="available_from" optional="hide"></field>
                         </group>
                         <group>
                             <field name="expected_price"></field>
@@ -60,8 +60,8 @@
                                     <field name="facades"/>
                                     <field name="garage"/>
                                     <field name="garden"/>
-                                    <field name="garden_area"/>
-                                    <field name="garden_orientation"/>
+                                    <field name="garden_area" attrs="{'invisible': [('garden','=', False)]}"/>
+                                    <field name="garden_orientation" attrs="{'invisible': [('garden','=', False)]}"/>
                                     <field name="total_area"/>
                                 </group>
                             </group>
@@ -69,7 +69,9 @@
 
                         <page string="Offers" name="offer_list">
                             <field name="offer_ids" colspan="4" nolabel="1" height="260">
-                                <tree string="Offer lists">
+                                <tree string="Offer lists" decoration-info="status == False" decoration-muted="status == 'refuse'"
+                                      decoration-success="status == 'accepted'" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
                                     <field name="price"/>
                                     <field name="partner_id"/>
                                     <field name="validity"/>
@@ -88,7 +90,6 @@
                                     </group>
                                 </form>
                             </field>
-
                         </page>
 
                         <page string="Other Info" name="other_information">
@@ -119,12 +120,43 @@
             </form>
         </field>
     </record>
+<!-- Form property_type-->
+    <record id="view_property_type_form" model="ir.ui.view">
+        <field name="name">demo.property.type.form</field>
+        <field name="model">demo.property.type</field>
+        <field name="arch" type="xml">
+            <form string="property_type_form">
+                <sheet>
+                    <group name="primary_info">
+                        <field name="name"/>
+                    </group>
+                    <group name="sub_info" string="More Detail">
+                        <field name="create_date"></field>
+                        <field name="write_date"></field>
+                    </group>
+                    <notebook>
+                        <page string="Properties" name="properties">
+                            <field name="property_ids" colspan="4" nolabel="1" height="260">
+                                <tree string="Property lists">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name" string="Title"/>
+                                    <field name="expected_price" string="Expected Price"/>
+                                    <field name="state" string="Status"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
 <!-- Tree  list view-->
     <record id="view_property_tree" model="ir.ui.view">
         <field name="name">demo.property.tree</field>
         <field name="model">demo.property</field>
         <field name="arch" type="xml">
-            <tree string="Properties" create="true">
+            <tree string="Properties" create="true" default_order="create_date desc" multi_edit="1" decoration-info="state == 'new'"
+                  decoration-muted="state == 'canceled'" decoration-success="state == 'sold'" decoration-primary="state == 'processing'">
                 <field name="name"></field>
                 <field name="property_type_id"></field>
                 <field name="post_code"></field>
@@ -135,7 +167,8 @@
                 <field name="is_good_choice"></field>
                 <field name="sale_man_id"/>
                 <field name="buyer_id"/>
-                <field name="tag_ids" widget="many2many_tags"></field>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_edit_color': False}"></field>
+                <field name="state"/>
                 <field name="create_date"></field>
                 <field name="write_date"></field>
             </tree>
@@ -152,7 +185,7 @@
                 <field name="post_code"/>
                 <field name="expected_price"/>
                 <field name="bedrooms"/>
-                <field name="live_area"/>
+                <field name="live_area" filter_domain="[('live_area','>=', self)]"/>
                 <field name="facades"/>
                 <filter string="Available" date="available_from" default_period="this_week" name="available_filter"/>
 <!--                <field name="campaign_id"/>-->
