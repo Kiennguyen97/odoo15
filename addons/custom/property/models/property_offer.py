@@ -1,4 +1,5 @@
 from odoo import models, fields, api, exceptions
+from odoo.tools import float_compare
 import datetime
 
 """
@@ -82,6 +83,7 @@ class PropertyOffer(models.Model):
         for record in self:
             if self.status == 'refuse':
                 return True
-            if record.price < record.property_id.expected_price * 90 / 100:
-                raise exceptions.ValidationError("It will not possible to accept an offer lower than 90% of the expected price.")
+            # Always use the float_compare() and float_is_zero() methods when working with floats
+            if float_compare(record.property_id.expected_price * 90 / 100, record.price, precision_digits=2) == 1:
+                raise exceptions.ValidationError("It will impossible to accept an offer lower than 90% of the expected price.")
 

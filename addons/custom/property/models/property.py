@@ -19,7 +19,7 @@ class Property(models.Model):
     ], readonly=True, string='Status', default='new')
     sale_man_id = fields.Many2one('res.users', string='Salesperson', index=True, required=True, tracking=True,
                                   default=lambda self: self.env.user)
-    buyer_id = fields.Many2one('res.partner', string='Buyer')
+    buyer_id = fields.Many2one('res.partner', string='Buyer', readonly=True)
     property_type_id = fields.Many2one('demo.property.type', string='Property Type', required=True)
     tag_ids = fields.Many2many('demo.property.tag', string='Property Tag')
     offer_ids = fields.One2many('demo.property.offer', 'property_id', 'Offers', required=True)
@@ -50,6 +50,11 @@ class Property(models.Model):
                              max_width=1024, max_height=1024)
     signed_by = fields.Char('Signed By', help='Name of the person that signed the SO.', copy=False)
     signed_on = fields.Datetime('Signed On', help='Date of the signature.', copy=False)
+
+    _sql_constraints = [
+        ('check_expected_price', 'CHECK(expected_price > 0)',
+         'The expected price must be (strictly) positive')
+    ]
 
     @api.model
     def create(self, vals_list):
