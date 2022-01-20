@@ -9,7 +9,8 @@ class PropertyType(models.Model):
     _name = "demo.property.type"
     _order = 'name desc'
 
-    name = fields.Char(name="Name", required=True)
+    name = fields.Char(string='Title', required=True)
+    sequence = fields.Integer('Sequence', default=1, help="Used to order stages. Lower is better.")
 
     property_ids = fields.One2many(comodel_name='demo.property', inverse_name='property_type_id', string='Property IDs')
 
@@ -22,3 +23,4 @@ class PropertyType(models.Model):
     def create(self, vals_list):
         res = super(PropertyType, self).create(vals_list)
         return res
+

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<!--  Action  -->
+<!--  Action Property -->
     <record id="demo_property_action" model="ir.actions.act_window">
         <field name="name">Properties</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">demo.property</field>
         <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{
+            'search_default_postcode_filter': 1,
+            'search_default_live_area': 100
+            }
+        </field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new Property
@@ -127,6 +132,15 @@
         <field name="arch" type="xml">
             <form string="property_type_form">
                 <sheet>
+<!--                    <div class="oe_button_box" name="button_box">-->
+<!--                        <button name="action_view_invoice"-->
+<!--                            type="object"-->
+<!--                            class="oe_stat_button"-->
+<!--                            icon="fa-pencil-square-o"-->
+<!--                            attrs="{'invisible': [('invoice_count', '=', 0)]}">-->
+<!--                            <field name="invoice_count" widget="statinfo" string="Invoices"/>-->
+<!--                        </button>-->
+<!--                    </div>-->
                     <group name="primary_info">
                         <field name="name"/>
                     </group>
@@ -171,6 +185,17 @@
                 <field name="state"/>
                 <field name="create_date"></field>
                 <field name="write_date"></field>
+            </tree>
+        </field>
+    </record>
+<!-- Tree  list  type view-->
+    <record id="view_property_type_tree" model="ir.ui.view">
+        <field name="name">demo.property.type.tree</field>
+        <field name="model">demo.property.type</field>
+        <field name="arch" type="xml">
+            <tree string="Property Types" create="true" default_order="sequence">
+                <field name="sequence" widget="handle"/>
+                <field name="name"></field>
             </tree>
         </field>
     </record>
@@ -233,7 +258,7 @@
             </kanban>
         </field>
     </record>
-<!-- Action  -->
+<!-- Action Type -->
     <record id="demo_property_type_action" model="ir.actions.act_window">
         <field name="name">Properties Type</field>
         <field name="type">ir.actions.act_window</field>
@@ -245,7 +270,7 @@
             </p>
         </field>
     </record>
-<!--  Action  -->
+<!--  Action Tag -->
     <record id="demo_property_tag_action" model="ir.actions.act_window">
         <field name="name">Properties Tag</field>
         <field name="type">ir.actions.act_window</field>
