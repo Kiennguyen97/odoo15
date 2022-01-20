@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+<!-- Action view offer from property type   -->
+    <record id="action_view_offer_on_xml" model="ir.actions.act_window">
+        <field name="res_model">demo.property.offer</field>
+        <field name="name">action_view_offer_on_xml</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('property_type_id', '=', active_id)]</field>
+    </record>
 <!--  Action Property -->
     <record id="demo_property_action" model="ir.actions.act_window">
         <field name="name">Properties</field>
@@ -7,10 +15,15 @@
         <field name="res_model">demo.property</field>
         <field name="view_mode">tree,form,kanban</field>
         <field name="context">{
-            'search_default_postcode_filter': 1,
-            'search_default_live_area': 100
+            'search_default_state_filter': 1,
             }
         </field>
+<!--        <field name="context">{-->
+<!--            'search_default_state_filter': 1,-->
+<!--            'search_default_state_filter_group': 1,-->
+<!--            'search_default_live_area': 100-->
+<!--            }-->
+<!--        </field>-->
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new Property
@@ -132,15 +145,29 @@
         <field name="arch" type="xml">
             <form string="property_type_form">
                 <sheet>
-<!--                    <div class="oe_button_box" name="button_box">-->
-<!--                        <button name="action_view_invoice"-->
-<!--                            type="object"-->
-<!--                            class="oe_stat_button"-->
-<!--                            icon="fa-pencil-square-o"-->
-<!--                            attrs="{'invisible': [('invoice_count', '=', 0)]}">-->
-<!--                            <field name="invoice_count" widget="statinfo" string="Invoices"/>-->
-<!--                        </button>-->
-<!--                    </div>-->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_offer_accepted"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-level-down"
+                            attrs="{'invisible': [('offer_count', '=', 0)]}">
+                            <field name="offer_count_accepted" widget="statinfo" string="Offers Accepted"/>
+                        </button>
+                        <button name="action_view_offer_refuse"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible': [('offer_count', '=', 0)]}">
+                            <field name="offer_count_refuse" widget="statinfo" string="Offers Refuse"/>
+                        </button>
+                        <button name="%(property.action_view_offer_on_xml)d"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-check"
+                            attrs="{'invisible': [('offer_count', '=', 0)]}">
+                            <field name="offer_count" widget="statinfo" string="Offers On XML"/>
+                        </button>
+                    </div>
                     <group name="primary_info">
                         <field name="name"/>
                     </group>
@@ -164,7 +191,7 @@
             </form>
         </field>
     </record>
-<!-- Tree  list view-->
+<!-- Tree property view-->
     <record id="view_property_tree" model="ir.ui.view">
         <field name="name">demo.property.tree</field>
         <field name="model">demo.property</field>
@@ -188,7 +215,7 @@
             </tree>
         </field>
     </record>
-<!-- Tree  list  type view-->
+<!-- Tree property_type view-->
     <record id="view_property_type_tree" model="ir.ui.view">
         <field name="name">demo.property.type.tree</field>
         <field name="model">demo.property.type</field>
@@ -199,7 +226,23 @@
             </tree>
         </field>
     </record>
-<!-- Search config   -->
+<!-- Tree property_offer view-->
+    <record id="view_property_offer_tree" model="ir.ui.view">
+        <field name="name">demo.property.offer.tree</field>
+        <field name="model">demo.property.offer</field>
+        <field name="arch" type="xml">
+            <tree string="Offer lists" decoration-info="status == False" decoration-muted="status == 'refuse'"
+                  decoration-success="status == 'accepted'" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="price"/>
+                <field name="partner_id"/>
+                <field name="validity"/>
+                <field name="deadline"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+<!-- Search config property   -->
     <record id="view_property_filter" model="ir.ui.view">
         <field name="name">demo.property.select</field>
         <field name="model">demo.property</field>
@@ -221,15 +264,18 @@
 <!--                <filter string="Sales Orders" name="sales" domain="[('state','in',('sale','done'))]"/>-->
 <!--                <separator/>-->
 <!--                <filter string="Create Date" name="filter_create_date" date="create_date"/>-->
+                <filter name="state_filter" string="Status" domain="[('state','in',('new','processing'))]"/>
+                <filter name="state_filter" string="Status" domain="[('state','in',('canceled','sold'))]"/>
                 <group expand="0" string="Group By">
 <!--                    <filter string="Salesperson" name="salesperson" domain="[]" context="{'group_by': 'user_id'}"/>-->
 <!--                    <filter name="customer" string="Customer" domain="[]" context="{'group_by': 'partner_id'}"/>-->
                     <filter name="postcode_filter" string="Postcode" domain="[]" context="{'group_by': 'post_code'}"/>
+                    <filter name="state_filter_group" string="Status" domain="[]" context="{'group_by': 'state'}"/>
                 </group>
             </search>
         </field>
     </record>
-<!-- Kanban  view-->
+<!-- Kanban property -->
     <record id="view_property_kanban" model="ir.ui.view">
         <field name="name">demo.property.kanban</field>
         <field name="model">demo.property</field>
@@ -258,7 +304,7 @@
             </kanban>
         </field>
     </record>
-<!-- Action Type -->
+<!-- Action property_type -->
     <record id="demo_property_type_action" model="ir.actions.act_window">
         <field name="name">Properties Type</field>
         <field name="type">ir.actions.act_window</field>
@@ -270,7 +316,7 @@
             </p>
         </field>
     </record>
-<!--  Action Tag -->
+<!-- Action property_tag -->
     <record id="demo_property_tag_action" model="ir.actions.act_window">
         <field name="name">Properties Tag</field>
         <field name="type">ir.actions.act_window</field>
