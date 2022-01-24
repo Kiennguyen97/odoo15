@@ -14,8 +14,8 @@ class Property(models.Model):
     sequence = fields.Integer('Sequence', default=1, help="Used to order stages. Lower is better.")
     state = fields.Selection([
         ('new', 'New'),
-        ('canceled', 'Canceled'),
         ('processing', 'Processing'),
+        ('canceled', 'Canceled'),
         ('sold', 'Sold')
     ], readonly=True, string='Status', default='new')
     sale_man_id = fields.Many2one('res.users', string='Salesperson', index=True, required=True, tracking=True,
@@ -104,5 +104,10 @@ class Property(models.Model):
 
     def un_sold(self):
         self.state = 'processing'
+
+    @api.ondelete(at_uninstall=False)
+    def delete_property(self):
+        if any(property.state in ['processing', 'sold'] for property in self):
+            raise exceptions.UserError("Can't delete processing or sold property !")
 
 
