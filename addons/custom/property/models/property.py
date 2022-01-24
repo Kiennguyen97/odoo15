@@ -18,6 +18,7 @@ class Property(models.Model):
         ('canceled', 'Canceled'),
         ('sold', 'Sold')
     ], readonly=True, string='Status', default='new')
+
     sale_man_id = fields.Many2one('res.users', string='Salesperson', index=True, required=True, tracking=True,
                                   default=lambda self: self.env.user)
     buyer_id = fields.Many2one('res.partner', string='Buyer', readonly=True)

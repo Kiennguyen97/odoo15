@@ -100,7 +100,8 @@ class PropertyOffer(models.Model):
                     "It will impossible to accept an offer lower than 90% of the expected price.")
 
     def get_max_offer(self, id):
-        property = self.env['demo.property'].search([('id', '=', id)])
+        # property = self.env['demo.property'].search([('id', '=', id)])
+        property = self.env['demo.property'].browse(id)
         best_offer = 0
         for price in property.offer_ids.mapped('price'):
             if best_offer < price:
