@@ -329,7 +329,6 @@
             </p>
         </field>
     </record>
-
 <!--    Chapter 13: Inheritance -->
     <record id="property_user_form_inherited" model="ir.ui.view">
         <field name="name">property.res.users.form.inherited</field>
