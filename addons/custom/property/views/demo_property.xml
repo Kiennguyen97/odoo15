@@ -275,12 +275,13 @@
             </search>
         </field>
     </record>
-<!-- Kanban property -->
+<!-- Kanban property Chapter 15: A Brief History Of QWeb  -->
     <record id="view_property_kanban" model="ir.ui.view">
         <field name="name">demo.property.kanban</field>
         <field name="model">demo.property</field>
         <field name="arch" type="xml">
             <kanban class="o_kanban_mobile">
+                <field name="state"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_content oe_kanban_global_click">
@@ -289,14 +290,14 @@
                                     <field name="name"/>
                                 </div>
                                 <div class="col-12">
-                                    <field name="sale_man_id"/>
-                                </div>
-                                <div class="col-12">
-                                    <field name="selling_price"/>
+                                    <field name="expected_price"/>
                                 </div>
                                 <div class="col-12">
                                     <field name="buyer_id"/>
                                 </div>
+                            </div>
+                            <div t-if="record.state.raw_value == 'new'">
+                                This is new!
                             </div>
                         </div>
                     </t>
