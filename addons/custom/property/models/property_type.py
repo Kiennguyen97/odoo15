@@ -42,6 +42,8 @@ class PropertyType(models.Model):
         for property_type in self:
             property_type.offer_count_refuse = len(property_type.offer_ids.filtered(lambda offer: offer.status == 'refuse'))
 
+    """ Action view offer
+    """
     def action_view_offer_accepted(self):
         return self.action_view_offers('accepted')
 

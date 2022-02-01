@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<!-- Action view offer from property type   -->
+<!-- Action view offer from property type Smart Button  -->
     <record id="action_view_offer_on_xml" model="ir.actions.act_window">
         <field name="res_model">demo.property.offer</field>
         <field name="name">action_view_offer_on_xml</field>
