@@ -11,7 +11,8 @@
     'data': [
         'views/menu.xml',
         'views/demo_property.xml',
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
+        'security/property_security.xml',
     ],
     'demo': [
     ],

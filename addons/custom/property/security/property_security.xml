@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_category_real_property_brokerage">
+            <field name="name">Real Property Brokerage</field>
+            <field name="description">Real Property Brokerage</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="property_group_user" model="res.groups">
+            <field name="name">Agent</field>
+            <field name="comment">Property Group User</field>
+            <field name="category_id" ref="property.module_category_real_property_brokerage"/>
+        </record>
+
+        <record id="property_group_manager" model="res.groups">
+            <field name="name">Managers</field>
+            <field name="implied_ids" eval="[(4, ref('property.property_group_user'))]"/>
+            <field name="category_id" ref="property.module_category_real_property_brokerage"/>
+        </record>
+
+
+    </data>
+</odoo>
