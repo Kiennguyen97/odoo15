@@ -1,0 +1,133 @@
+.plans_title {
+    display: flex;
+    padding: 30px 0;
+    justify-content: center;
+}
+
+.plans_title h1 {
+    color: rgb(51, 71, 91);
+    font-size: 32px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.plans_content .plans_content_row {
+    justify-content: center;
+    display: flex;
+}
+
+.plans_col {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgb(223, 227, 235);
+}
+
+.plans_name {
+    margin: 10px 0;
+    font-size: 22px;
+    line-height: normal;
+    word-break: break-word;
+}
+
+.plans_content .owl-stage {
+    display: flex;
+}
+
+.plans_content .owl-stage .owl-item {
+    display: inline-grid
+}
+
+.plans_price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.plans_price label {
+    font-size: 12px;
+    line-height: 18px;
+    color: #516f90;
+}
+
+.plans_price span {
+   color: #33475b;
+   font-size: 22px;
+   font-weight: 500;
+   line-height: initial;
+}
+
+.plans_description {
+    display: flex;
+    text-align: center;
+    margin: 10px;
+}
+
+.plans_description p {
+    line-height: 2;
+    font-weight: 400;
+    color: #33475b;
+    font-size: 12px;
+}
+
+.plans_action {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.plans_action .btn_try_now {
+    background-color: #714B67;
+    border-color: #714B67;
+}
+
+.plans_action  .btn {
+    margin: 0px 5px;
+    padding: 5px 20px;
+    color: #fff;
+}
+
+.plans_action .btn_buy_now {
+    background-color: #ff7a59;
+    border-color: #ff7a59;
+}
+
+.plans_tab_module {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.plans_tab_module .tab_module_name {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgb(0, 145, 174);
+    word-break: break-word;
+}
+
+.plans_tab_module .tab_module_content {
+    display: flex;
+    flex-direction: column;
+}
+
+.plans_tab_module .tab_module_content .module-col:before{
+    margin-right: 10px;
+    font-family: "FontAwesome";
+    content: "\f00c";
+}
+
+.plans_tab_module .tab_module_content .module-col .module_name{
+    font-weight: 400;
+    font-size: 14px;
+    color: #33475b;
+    line-height: 24px;
+    word-break: break-word;
+}
+

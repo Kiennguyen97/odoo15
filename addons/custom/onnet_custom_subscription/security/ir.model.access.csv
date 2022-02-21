@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_modules_management,access_modules_management,model_modules_management,,1,1,1,1
+access_customer_segment_management,access_customer_segment_management,model_customer_segment_management,,1,1,1,1
+access_tab_module,access_tab_module,model_tab_module,,1,1,1,1

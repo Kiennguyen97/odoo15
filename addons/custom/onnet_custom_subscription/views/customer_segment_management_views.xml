@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Action sale subscription-->
+    <record id="customer_segment_management_form_view" model="ir.ui.view">
+        <field name="name">customer.segment.management.form.view</field>
+        <field name="model">customer.segment.management</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                      <group>
+                          <div class="oe_title">
+                                <label for="customer_segment_name" string="Customer Segment Name"/>
+                                <h1><field name="customer_segment_name" placeholder="e.g. Customer Segment Name"/></h1>
+                            </div>
+                      </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="customer_segment_management_tree_view" model="ir.ui.view">
+        <field name="name">customer.segment.management.tree.view</field>
+        <field name="model">customer.segment.management</field>
+        <field name="arch" type="xml">
+            <tree string="Customer Segment Name " default_order="create_date desc" >
+                <field name="customer_segment_name"  optional="show"/>
+                <field name="subscription_plan"  optional="show" widget="many2many_tags" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_customer_segment_management" model="ir.actions.act_window">
+        <field name="name">Customer Segment Management</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">customer.segment.management</field>
+    </record>
+    <!--End action sale subscription-->
+
+    <!--menu sale subscription-->
+    <menuitem id="menu_customer_segment"
+                name="Customer Segments"
+                action="action_customer_segment_management"
+                parent="sale_subscription.menu_sale_subscription_root"
+                sequence="50"/>
+    <!--End menu sale subscription-->
+</odoo>

@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_demo_property,access.demo.property,model_demo_property,,1,1,1,0
-access_demo_property_type,access.demo.property.type,model_demo_property_type,,1,1,1,0
+access_demo_property,access.demo.property,model_demo_property,property_group_user,1,1,1,0
+access_demo_property_type,access.demo.property.type,model_demo_property_type,property_group_user,1,1,0,0
+access_demo_property_tag,access.demo.property.tag,model_demo_property_tag,property_group_user,1,1,0,0
+access_demo_property_offer,access.demo.property.offer,model_demo_property_offer,property_group_user,1,1,1,0

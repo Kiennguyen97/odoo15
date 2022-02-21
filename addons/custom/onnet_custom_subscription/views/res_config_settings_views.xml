@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.subscription</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="20"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Subscriptions" string="Subscriptions"
+                     data-key="sale_subscription">
+                    <h2>General</h2>
+                    <div class="row mt16 o_settings_container" id="subscriptions_selection_settings">
+                        <div class="col-xs-12 col-md-6 o_setting_box" id="subscriptions_general">
+                            <div class="o_setting_right_pane">
+                                <label string="Trial period (days)" for="trial_period"/>
+                                <div class="text-muted">
+                                    Define the period for trial subscriptions.
+                                </div>
+                                <div class="mt16">
+                                    <field placeholder="Enter trial period" name="trial_period"/>
+                                </div>
+
+                                <label string="Database expiration time (hours)" for="db_expiration_time"/>
+                                <div class="text-muted">
+                                    Define the period for database to be expired.
+                                </div>
+                                <div class="mt16">
+                                    <field placeholder="Enter database expiration time" name="db_expiration_time"/>
+                                </div>
+
+                                <label string="Instance removal period  (days)" for="instance_removal_period"/>
+                                <div class="text-muted">
+                                    Define the period to remove instance totally after expiration time.
+                                </div>
+                                <div class="mt16">
+                                    <field placeholder="Enter instance removal period" name="instance_removal_period"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_setting_subscription" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'sale_subscription', 'bin_size': False}</field>
+        </record>
+
+    <!--menu setting subscription-->
+    <menuitem
+            id="menu_config"
+            name="Settings"
+            parent="sale_subscription.menu_sale_subscription_config"
+            sequence="0"
+            action="action_setting_subscription"
+           />
+    <!--End menu setting subscription-->
+</odoo>
