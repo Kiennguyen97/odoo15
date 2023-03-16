@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
-    'name': 'Academy',
+    'name': 'BaoSon',
     'version': '1.0',
-    'summary': 'Academy',
+    'summary': 'BaoSon',
     'sequence': 10,
-    'depends': [],
+    'depends': [
+        'base',
+        'website',
+        'hr',
+    ],
     'data': [],
     'demo': [
     ],

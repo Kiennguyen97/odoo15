@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <data>
-<!--        <record id="student_a" model="x.student">-->
-<!--            <field name="name">Student</field>-->
-<!--        </record>-->
-    </data>
-</odoo>
